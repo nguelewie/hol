@@ -6,12 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-                
-            }
-        }
+        
        stage('build') {
             steps {
                 echo 'Hello build'
@@ -20,19 +15,21 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('deploy') {
-            steps {
-                echo 'Hello deploy'
-                
-            }
-        }
         stage('test') {
             steps {
-                echo 'Hello test'
-                
+                sh 'mvn test'      
             }
         }
-        
+       stage ('build and publish image') {
+      steps {
+        script {
+          checkout scm
+          docker.withRegistry('', 'dockerUserID') {
+          def customImage = docker.build("nguelewie/hol-pipeline:${env.BUILD_ID}")
+          customImage.push()
+          }
+    }
+ 
     }
 }
 
