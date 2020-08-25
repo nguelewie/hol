@@ -24,12 +24,14 @@ pipeline {
       steps {
         script {
           checkout scm
-          docker.withRegistry('', 'dockerUserID') {
+          docker.withRegistry('', 'http://3.81.15.153:8080/credentials/store/system/domain/_/credential/DockerRegistryID') {
           def customImage = docker.build("nguelewie/hol-pipeline:${env.BUILD_ID}")
           customImage.push()
           }
     }
  
+    }
+}
     }
 }
 
