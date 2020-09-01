@@ -3,7 +3,6 @@ pipeline {
     tools {
         maven 'M2_HOME'
     }
-    
 
     stages {
         
@@ -25,9 +24,9 @@ pipeline {
       steps {
         script {
           checkout scm
-          docker.withRegistry('', 'DockerRgistryID') {
+          docker.withRegistry('', 'DockerRegistryID') {
           def customImage = docker.build("nguelewie/hol-pipeline:${env.BUILD_ID}")
-          def customImage1 = docker.build("nguelewie1/hol-pipeline")
+          def customImage1 = docker.build("nguelewie/hol-pipeline")
           customImage.push()
           customImage1.push()
           }
@@ -35,6 +34,6 @@ pipeline {
         
     }
 }
-  }
-}
 
+    }
+}
