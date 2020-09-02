@@ -1,9 +1,14 @@
 pipeline {
     agent any
+    triggers {
+  pollSCM '* * * * *'
+}
+    
+    
     tools {
         maven 'M2_HOME'
     }
-
+    
     stages {
         
        stage('build') {
@@ -24,16 +29,25 @@ pipeline {
       steps {
         script {
           checkout scm
-          docker.withRegistry('', 'DockerRegistryID') {
+          docker.withRegistry('', 'DockerRgistryID') {
           def customImage = docker.build("nguelewie/hol-pipeline:${env.BUILD_ID}")
           def customImage1 = docker.build("nguelewie/hol-pipeline")
           customImage.push()
           customImage1.push()
-          }
+
+
+
+}
     }
         
     }
 }
-
-    }
+       stage ( 'deployment trigger'){
+          steps {
+	    build 'hol-CD'
 }
+}
+  }
+}
+
+
