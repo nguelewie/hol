@@ -2,7 +2,7 @@ pipeline {
     agent any
     triggers {
      // polls the SCM every minute to look for changes to intergrate.
-  pollSCM('* * * * *')
+  pollSCM'* * * * *'
 }
 
     tools {
