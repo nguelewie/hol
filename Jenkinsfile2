@@ -31,7 +31,7 @@ pipeline {
           checkout scm
           docker.withRegistry('', 'DockerRegistryID') {
           def customImage = docker.build("nguelewie/hol-pipeline.revised:${env.BUILD_ID}")
-          def customImage1 = docker.build("nguelewie/hol-pipeline.revised")
+          def customImage1 = docker.build("nguelewie/hol-pipeline.rev")
           customImage.push()
           customImage1.push()
           }
