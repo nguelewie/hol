@@ -1,7 +1,7 @@
 pipeline {
     agent any
     triggers {
-    // poll the scm every one minute to intergrate changes.
+    // poll the scm every minute to intergrate changes.
   pollSCM '* * * * *'
 }
 
