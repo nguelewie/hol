@@ -24,10 +24,10 @@ pipeline {
         script {
         checkout scm
         docker.withRegistry('', 'DockerRegistryID') {
-        def customImage = docker.build("nguelewie/holipipeline:${env.BUILD_ID}")
-        customImage.push()
-
-    customImage.push('latest')
+        def customImage1 = docker.build("nguelewie/holipipeline:${env.BUILD_ID}")
+        def customImage = docker.build("nguelewie/holipipeline")
+        customImage.push1 ()
+        customImage.push ()
 
     }
 }
