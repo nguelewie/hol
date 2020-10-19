@@ -33,7 +33,7 @@ pipeline {
           def customImage = docker.build("nguelewie/hol-pipeline.revised:${env.BUILD_ID}")
           def customImage1 = docker.build("nguelewie/hol-pipeline.rev")
           customImage.push()
-          customImage1.push()
+          
           
           }
     }
