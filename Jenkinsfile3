@@ -19,7 +19,18 @@ pipeline {
             }
         }
        
-       
+       stage ('build and publish image') {
+      steps {
+        script {
+        checkout scm
+        docker.withRegistry('', 'DockerRegistryID') {
+        def customImage = docker.build("nguelewie/holipipeline:${env.BUILD_ID}")
+        customImage.push()
+
+    customImage.push('latest')
+
     }
 }
-
+  }
+ }
+}
