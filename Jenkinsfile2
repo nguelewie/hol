@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    triggers {
+     // polls the SCM every minute to look for changes.
+  pollSCM '* * * * *'
+}
+
     tools {
         maven 'M2_HOME'
     }    
