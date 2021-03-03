@@ -1,41 +1,37 @@
 pipeline {
     agent any
-    triggers {
-  pollSCM('* * * * *')
-}
-
-    tools {
-  maven 'M2_HOME'
-}
-
     stages {
-        stage('build') {
-            steps {
-               sh 'mvn clean'
-               sh 'mvn install'
-               sh 'mvn package'
-            }
+      stage ('build') {
+        steps {
+         echo "build step"
+         sleep 10
         }
-        
-        stage('test') {
-            steps {
-                sh 'mvn test'
-            }
+      
+      }
+      
+      stage ('test') {
+        steps {
+         echo "test step"
+         sleep 10
         }
-       
-       stage ('build and publish image') {
-      steps {
-        script {
-        checkout scm
-        docker.withRegistry('', 'DockerRegistryID') {
-        def customImage1 = docker.build("nguelewie/holipipeline:${env.BUILD_ID}")
-        def customImage = docker.build("nguelewie/holipipeline")
-        customImage1.push()
-        customImage.push()
-        
+      
+      }
+      
+      stage ('deploy') {
+        steps {
+         echo "deploy step"
+         sleep 10
         }
-}
-  }
- }
-}
+      
+      }
+      
+      stage ('docker') {
+        steps {
+         echo "image step"
+         sleep 10
+        }
+      
+      }
+    
+    }
 }
